@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <link rel="stylesheet" href="style.css"/>
+            <title>{% block title %}{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        {% include 'partials/navbar.html.twig' %}
+        <div id="content">
+        {% block content %}{% endblock %}
+        </div>
+        {% include 'partials/footer.html.twig' %}
+    </body>
+</html>

@@ -1,0 +1,14 @@
+<nav>
+  <ul>
+    <li>Accueil</li>
+    <li>Articles</li>
+  </ul>
+  <ul>
+  {% if not connected %}
+    <li>Se connecter</li>
+    <li>S'inscire</li>
+    {% else %}
+    <li>Se déconnecter</li>
+    {% endif %}
+  </ul>
+</nav>
