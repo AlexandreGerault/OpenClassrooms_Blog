@@ -4,5 +4,6 @@
 /public/css
 /public/js
 /vendor
+/mix-manifest.json
 .env
 !.env.example
