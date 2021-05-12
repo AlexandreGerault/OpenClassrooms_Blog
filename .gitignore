@@ -1,4 +1,8 @@
-node_modules/
-vendor/
+/node_modules
+/public/hot
+/public/storage
+/public/css
+/public/js
+/vendor
 .env
 !.env.example
