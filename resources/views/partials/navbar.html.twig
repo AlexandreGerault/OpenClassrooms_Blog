@@ -3,7 +3,7 @@
         <nav class="relative flex items-center justify-between sm:h-10 md:justify-center" aria-label="Global">
             <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
                 <div class="flex items-center justify-between w-full md:w-auto">
-                    <a href="#">
+                    <a href="/">
                         <span class="sr-only">Alexandre Gérault</span>
                         <img class="h-8 w-auto sm:h-10"
                              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
@@ -26,35 +26,22 @@
                 </div>
             </div>
             <div class="hidden md:flex md:space-x-10">
-                <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Product</a>
+                <a href="/" class="font-medium text-gray-500 hover:text-gray-900">À propos de moi</a>
 
-                <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Features</a>
+                <a href="/blog" class="font-medium text-gray-500 hover:text-gray-900">Articles</a>
 
-                <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Marketplace</a>
-
-                <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Company</a>
+                <a href="/portfolio" class="font-medium text-gray-500 hover:text-gray-900">Réalisations</a>
             </div>
             <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
             <span class="inline-flex rounded-md shadow">
-              <a href="#"
+              <a href="/connexion"
                  class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50">
-                Log in
+                Connexion
               </a>
             </span>
             </div>
         </nav>
     </div>
-
-    <!--
-      Mobile menu, show/hide based on menu open state.
-
-      Entering: "duration-150 ease-out"
-        From: "opacity-0 scale-95"
-        To: "opacity-100 scale-100"
-      Leaving: "duration-100 ease-in"
-        From: "opacity-100 scale-100"
-        To: "opacity-0 scale-95"
-    -->
 
     <div
             x-show="open"
@@ -78,7 +65,7 @@
                                 class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                                 @click="open = false"
                         >
-                            <span class="sr-only">Close menu</span>
+                            <span class="sr-only">Fermer le menu</span>
                             <!-- Heroicon name: outline/x -->
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor" aria-hidden="true">
@@ -89,21 +76,24 @@
                     </div>
                 </div>
                 <div class="px-2 pt-2 pb-3">
-                    <a href="#"
-                       class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Product</a>
+                    <a href="/"
+                       class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                        À propos de moi
+                    </a>
 
-                    <a href="#"
-                       class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Features</a>
+                    <a href="/blog"
+                       class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                        Articles
+                    </a>
 
-                    <a href="#"
-                       class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Marketplace</a>
-
-                    <a href="#"
-                       class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Company</a>
+                    <a href="/portfolio"
+                       class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                        Réalisations
+                    </a>
                 </div>
-                <a href="#"
+                <a href="/connexion"
                    class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
-                    Log in
+                    Connexion
                 </a>
             </div>
         </div>
