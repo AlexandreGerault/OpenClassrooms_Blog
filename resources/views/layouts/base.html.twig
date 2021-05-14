@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        {% block head %}
-            <link rel="stylesheet" href="style.css"/>
-            <title>{% block title %}{% endblock %}</title>
-            <link href="/css/app.css" rel="stylesheet">
-        {% endblock %}
-    </head>
-    <body>
-        {% include 'partials/navbar.html.twig' %}
-        <div id="content">
-        {% block content %}{% endblock %}
-        </div>
-        {% include 'partials/footer.html.twig' %}
-    </body>
+<head>
+    {% block head %}
+        <link rel="stylesheet" href="style.css"/>
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/css/app.css" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+<div id="page-content">
+    {% include 'partials/navbar.html.twig' %}
+    {% block content %}{% endblock %}
+    {% include 'partials/footer.html.twig' %}
+</div>
+</body>
 </html>
