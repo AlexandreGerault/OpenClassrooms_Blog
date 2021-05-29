@@ -1,6 +1,7 @@
 <?php
 
 use \AGerault\Blog\Controllers\Admin\BlogController as AdminBlogController;
+use AGerault\Blog\Controllers\Authentication\LoginController;
 use AGerault\Blog\Controllers\BlogController;
 use AGerault\Blog\Controllers\HomeController;
 
@@ -10,6 +11,19 @@ return [
         'name' => 'home',
         'method' => 'GET',
         'action' => [HomeController::class]
+    ],
+
+    [
+        'path' => '/connexion',
+        'name' => 'showLogin',
+        'method' => 'GET',
+        'action' => [LoginController::class]
+    ],
+    [
+        'path' => '/connexion',
+        'name' => 'handleLogin',
+        'method' => 'POST',
+        'action' => [LoginController::class]
     ],
 
     // Blog routes
