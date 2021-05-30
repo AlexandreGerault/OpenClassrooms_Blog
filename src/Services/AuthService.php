@@ -34,7 +34,7 @@ class AuthService
         return $this->session->has('auth');
     }
 
-    public function user(): AuthenticatableInterface
+    public function user(): ?AuthenticatableInterface
     {
         return $this->session->get('auth');
     }
