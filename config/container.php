@@ -41,3 +41,5 @@ $app->container()->addAlias(LoaderInterface::class, FilesystemLoader::class);
 $app->container()->addAlias(AuthenticatableProviderInterface::class, UsersRepository::class);
 $app->container()->addAlias(AuthenticatorInterface::class, Authenticator::class);
 $app->container()->addAlias(SessionInterface::class, \AGerault\Framework\Session\Session::class);
+
+require_once dirname(__DIR__) . '/config/twig.php';
