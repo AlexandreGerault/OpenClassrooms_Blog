@@ -3,7 +3,6 @@
 namespace AGerault\Blog\Validators;
 
 use AGerault\Framework\Validation\Rules\EmailRule;
-use AGerault\Framework\Validation\Rules\InArrayRule;
 use AGerault\Framework\Validation\Rules\SameRule;
 use AGerault\Framework\Validation\Rules\StringRule;
 use AGerault\Framework\Validation\Rules\UniqueRule;
