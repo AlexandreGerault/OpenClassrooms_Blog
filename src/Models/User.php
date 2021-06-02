@@ -2,9 +2,9 @@
 
 namespace AGerault\Blog\Models;
 
-use AGerault\Framework\Contracts\Authentication\AuthenticatableInterface;
+use AGerault\Blog\Contracts\Authentication\UserInterface;
 
-class User implements AuthenticatableInterface
+class User implements UserInterface
 {
 
     /**
@@ -13,7 +13,9 @@ class User implements AuthenticatableInterface
     public function __construct(
         protected string $name,
         protected string $login,
-        protected string $password
+        protected string $password,
+        protected bool $isValidated,
+        protected bool $isAdmin,
     ) {
     }
 
@@ -30,5 +32,20 @@ class User implements AuthenticatableInterface
     public function password(): string
     {
         return $this->password;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function isValidated(): bool
+    {
+        return $this->isValidated;
     }
 }

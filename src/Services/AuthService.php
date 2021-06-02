@@ -2,6 +2,7 @@
 
 namespace AGerault\Blog\Services;
 
+use AGerault\Blog\Contracts\Authentication\UserInterface;
 use AGerault\Framework\Contracts\Authentication\AuthenticatableInterface;
 use AGerault\Framework\Contracts\Authentication\AuthenticatableProviderInterface;
 use AGerault\Framework\Contracts\Authentication\AuthenticatorInterface;
@@ -34,7 +35,7 @@ class AuthService
         return $this->session->has('auth');
     }
 
-    public function user(): ?AuthenticatableInterface
+    public function user(): ?UserInterface
     {
         return $this->session->get('auth');
     }

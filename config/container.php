@@ -1,5 +1,6 @@
 <?php
 
+use AGerault\Blog\Contracts\Repositories\UsersRepositoryInterface;
 use AGerault\Framework\Contracts\Session\SessionInterface;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
@@ -39,6 +40,7 @@ $app->container()->addFactory(
 $app->container()->addAlias(ArticlesRepositoryInterface::class, ArticlesRepository::class);
 $app->container()->addAlias(LoaderInterface::class, FilesystemLoader::class);
 $app->container()->addAlias(AuthenticatableProviderInterface::class, UsersRepository::class);
+$app->container()->addAlias(UsersRepositoryInterface::class, UsersRepository::class);
 $app->container()->addAlias(AuthenticatorInterface::class, Authenticator::class);
 $app->container()->addAlias(SessionInterface::class, \AGerault\Framework\Session\Session::class);
 

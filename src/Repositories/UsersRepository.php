@@ -29,7 +29,9 @@ class UsersRepository implements AuthenticatableProviderInterface, UsersReposito
         return $queryResult ? new User(
             $queryResult['name'],
             $queryResult['email'],
-            $queryResult['password']
+            $queryResult['password'],
+            $queryResult['validated'],
+            $queryResult['admin']
         ) : throw new AuthenticatableNotFoundException("No user matching credentials has been found");
     }
 
@@ -48,8 +50,8 @@ class UsersRepository implements AuthenticatableProviderInterface, UsersReposito
         $pdo->bindParam('name', $name);
         $pdo->bindParam('email', $email);
         $pdo->bindParam('password', $password);
-        $result = $pdo->execute();
+        $pdo->execute();
 
-        return new User($name, $email, $password);
+        return new User($name, $email, $password, false, false);
     }
 }
