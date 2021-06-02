@@ -25,6 +25,7 @@ class UsersRepository implements AuthenticatableProviderInterface
         $queryResult = $query->fetch(PDO::FETCH_ASSOC);
 
         return $queryResult ? new User(
+            $queryResult['name'],
             $queryResult['email'],
             $queryResult['password']
         ) : throw new AuthenticatableNotFoundException("No user matching credentials has been found");
