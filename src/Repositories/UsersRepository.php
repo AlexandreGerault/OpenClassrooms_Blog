@@ -37,13 +37,18 @@ class UsersRepository implements AuthenticatableProviderInterface, UsersReposito
     {
         $password = password_hash($password, PASSWORD_ARGON2ID);
 
-        $query = (new QueryBuilder())->insert(['name', 'email', 'password' ])->toSQL();
-        $pdo = $this->pdo->prepare($query);
+        $query = (new QueryBuilder())->from("users")->insert(
+            [
+                'name'     => 'name',
+                'email'    => 'email',
+                'password' => 'password'
+            ]
+        )->toSQL();
+        $pdo   = $this->pdo->prepare($query);
         $pdo->bindParam('name', $name);
         $pdo->bindParam('email', $email);
         $pdo->bindParam('password', $password);
         $result = $pdo->execute();
-        dd($result);
 
         return new User($name, $email, $password);
     }
