@@ -11,6 +11,7 @@ class User implements AuthenticatableInterface
      * User constructor.
      */
     public function __construct(
+        protected string $name,
         protected string $login,
         protected string $password
     ) {
