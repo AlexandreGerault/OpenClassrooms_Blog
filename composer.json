@@ -1,33 +1,35 @@
 {
-    "name": "alexandre-gerault/oc-blog",
-    "description": "A blog for the OpenClassroom course",
-    "type": "project",
-    "license": "MIT License",
-    "authors": [
-        {
-            "name": "Alexandre Gérault",
-            "email": "alexandre@hexium.io"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "AGerault\\Blog\\": "src/",
-            "AGerault\\Framework\\": "framework/src/AGerault"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "AGerault\\Tests\\": "tests/"
-        }
-    },
-    "require-dev": {
-        "symfony/var-dumper": "^5.2",
-        "filp/whoops": "^2.12"
-    },
-    "require": {
-        "psr/container": "^2.0",
-        "guzzlehttp/psr7": "^1.8",
-        "twig/twig": "^3.0",
-        "psr/http-server-handler": "^1.0"
+  "name": "alexandre-gerault/oc-blog",
+  "description": "A blog for the OpenClassroom course",
+  "type": "project",
+  "license": "MIT License",
+  "authors": [
+    {
+      "name": "Alexandre Gérault",
+      "email": "alexandre@hexium.io"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AGerault\\Blog\\": "src/",
+      "AGerault\\Framework\\": "framework/src/AGerault"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AGerault\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5.2",
+    "filp/whoops": "^2.12",
+    "phpunit/phpunit": "^9.5"
+  },
+  "require": {
+    "psr/container": "^2.0",
+    "guzzlehttp/psr7": "^1.8",
+    "twig/twig": "^3.0",
+    "psr/http-server-handler": "^1.0",
+    "ext-pdo": "*"
+  }
 }
