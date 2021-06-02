@@ -4,7 +4,9 @@ namespace AGerault\Blog\Controllers\Authentication;
 
 use AGerault\Blog\Controllers\BaseController;
 use AGerault\Blog\Services\AuthService;
+use AGerault\Blog\Validators\LoginValidator;
 use GuzzleHttp\Psr7\Response;
+use PDO;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Twig\Environment;
@@ -16,7 +18,8 @@ class LoginController extends BaseController
      */
     public function __construct(
         protected Environment $twig,
-        protected AuthService $login
+        protected AuthService $login,
+        protected PDO $PDO
     ) {
         parent::__construct($twig);
     }
@@ -39,12 +42,17 @@ class LoginController extends BaseController
     private function handleForm(ServerRequestInterface $request): ResponseInterface
     {
         // Validating data
-        $body = $request->getParsedBody();
+        $validator = new LoginValidator($request->getParsedBody(), $this->PDO);
+        $validated = $validator->validated();
+        if ($validator->isValid()) {
+            return new Response(400, [], implode(', ', $validator->errors()));
+        }
+
 
         // Authentication
-        $user = $this->login->attempt($body['email'], $body['password']);
+        $user = $this->login->attempt($validated['email'], $validated['password']);
 
-        if (! $user) {
+        if ( ! $user) {
             return new Response(400, [], 'Invalid credentials');
         }
 
