@@ -38,4 +38,9 @@ class AuthService
     {
         return $this->session->get('auth');
     }
+
+    public function logout(): void
+    {
+        $this->session->forget('auth');
+    }
 }
