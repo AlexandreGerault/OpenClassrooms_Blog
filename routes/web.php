@@ -2,6 +2,7 @@
 
 use \AGerault\Blog\Controllers\Admin\BlogController as AdminBlogController;
 use AGerault\Blog\Controllers\Authentication\LoginController;
+use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
 use AGerault\Blog\Controllers\HomeController;
 
@@ -24,6 +25,19 @@ return [
         'name' => 'handleLogin',
         'method' => 'POST',
         'action' => [LoginController::class]
+    ],
+
+    [
+        'path' => '/inscription',
+        'name' => 'showRegister',
+        'method' => 'GET',
+        'action' => [RegistrationController::class]
+    ],
+    [
+        'path' => '/inscription',
+        'name' => 'handleRegister',
+        'method' => 'POST',
+        'action' => [RegistrationController::class]
     ],
 
     // Blog routes
