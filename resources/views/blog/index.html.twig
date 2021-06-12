@@ -1,20 +1,42 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block title %}
-Liste des derniers articles
+    Liste des derniers articles
 {% endblock %}
 
 {% block content %}
-<main>
-<section>
-<h1>Derniers articles</h1>
-  <article>
-  <header>
-  <h1>La fin des haricots magiques</h1>
-  <p>Par Hugo Gérault</p>
-  </header>
-  <p>Les haricots magiques sont une sorte de plante magnifiques permettant de restaurer les facultés de combat de supers guerriers.</p>
-  </article>
-</section>
-</main>
+    <main class="py-12 bg-gray-50">
+        <section class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
+                    Derniers articles
+                </h1>
+                <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+                    Je partage mes dernières pensées et mes dernières découvertes sur le monde du développement et
+                    autres domaines qui s&apos;en approche.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                {% for article in articles %}
+                <article class="px-6 py-4 shadow rounded-lg overflow-hidden bg-white">
+                    <header class="flex flex-col gap-1">
+                        <h1 class="text-lg font-semibold">
+                            <a href="/blog/{{ article.slug }}/{{ article.id }}">
+                            {{ article.name }}
+                            </a>
+                        </h1>
+                        <p class="text-sm text-gray-700">Écrit par {{ article.author.name }}</p>
+                    </header>
+                    <p class="my-4">
+                        {{ article.chapo }}
+                    </p>
+                    <footer>
+                        <p class="text-sm">Modifié la dernière fois {{ article.updatedAt | date('l j F Y \à H\\hi') }}</p>
+                    </footer>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
 {% endblock %}

@@ -16,3 +16,4 @@ RUN docker-php-ext-enable apcu
 COPY --chown=1000:1000 ./ /usr/src/app
 
 RUN PATH=$PATH:/usr/src/app/vendor/bin:bin
+RUN locale-gen fr_FR.UTF-8 && dpkg-reconfigure locales

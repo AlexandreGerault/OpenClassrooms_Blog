@@ -32,7 +32,7 @@
 
                 <a href="/portfolio" class="font-medium text-gray-500 hover:text-gray-900">Réalisations</a>
             </div>
-            <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
+            <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 gap-4">
                 {% if logged != true %}
                     <span class="inline-flex rounded-md shadow">
                       <a href="/connexion"
@@ -41,7 +41,12 @@
                       </a>
                     </span>
 
-                    {{ user.login }}
+                    <span class="inline-flex rounded-md shadow">
+                      <a href="/inscription"
+                         class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50">
+                        Inscription
+                      </a>
+                    </span>
                 {% else %}
                     {{ user.login }}
                 {% endif %}

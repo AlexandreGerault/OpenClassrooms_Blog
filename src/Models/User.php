@@ -11,41 +11,41 @@ class User implements UserInterface
      * User constructor.
      */
     public function __construct(
-        protected string $name,
-        protected string $login,
-        protected string $password,
-        protected bool $isValidated,
-        protected bool $isAdmin,
+        protected ?string $name = null,
+        protected ?string $login = null,
+        protected ?string $password = null,
+        protected ?bool $isValidated = false,
+        protected ?bool $isAdmin = false
     ) {
     }
 
     public function key(): int|string
     {
-        return $this->login();
+        return $this?->login();
     }
 
     public function login(): string
     {
-        return $this->login;
+        return $this?->login;
     }
 
     public function password(): string
     {
-        return $this->password;
+        return $this?->password;
     }
 
     public function isAdmin(): bool
     {
-        return $this->isAdmin;
+        return $this?->isAdmin;
     }
 
     public function name(): string
     {
-        return $this->name;
+        return $this?->name;
     }
 
     public function isValidated(): bool
     {
-        return $this->isValidated;
+        return $this?->isValidated;
     }
 }
