@@ -30,6 +30,7 @@
     "guzzlehttp/psr7": "^1.8",
     "twig/twig": "^3.0",
     "psr/http-server-handler": "^1.0",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "beberlei/assert": "^3.3"
   }
 }
