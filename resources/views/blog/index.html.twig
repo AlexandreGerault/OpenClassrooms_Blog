@@ -32,7 +32,7 @@
                         {{ article.chapo }}
                     </p>
                     <footer>
-                        <p class="text-sm">Écrit {{ article.updatedAt | date('l j F Y \à H\hi') }}</p>
+                        <p class="text-sm">Modifié la dernière fois {{ article.updatedAt | date('l j F Y \à H\\hi') }}</p>
                     </footer>
                 </article>
                 {% endfor %}
