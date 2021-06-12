@@ -10,15 +10,9 @@ use AGerault\Framework\Contracts\Authentication\Exceptions\AuthenticatableNotFou
 use AGerault\Framework\Database\QueryBuilder;
 use PDO;
 
-class UsersRepository implements AuthenticatableProviderInterface, UsersRepositoryInterface
+class UsersRepository extends BaseRepository implements AuthenticatableProviderInterface, UsersRepositoryInterface
 {
-    public function __construct(protected PDO $pdo)
-    {
-    }
-
-    /**
-     * @throws AuthenticatableNotFoundException
-     */
+    /** @throws AuthenticatableNotFoundException */
     public function fetch(int|string $key): AuthenticatableInterface
     {
         $query = $this->pdo->prepare('SELECT * FROM users WHERE email = :email;');
