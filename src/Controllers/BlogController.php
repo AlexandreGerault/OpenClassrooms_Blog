@@ -26,6 +26,8 @@ class BlogController extends BaseController
 
     public function show(ServerRequest $request, string $slug, int $id): ResponseInterface
     {
-        return $this->render('blog/show.html.twig', compact('slug', 'id'));
+        $article = $this->repository->getArticleBySlug($slug);
+
+        return $this->render('blog/show.html.twig', compact('article'));
     }
 }

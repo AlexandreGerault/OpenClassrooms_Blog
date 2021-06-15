@@ -11,8 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "AGerault\\Blog\\": "src/",
-      "AGerault\\Framework\\": "framework/src/AGerault"
+      "AGerault\\Blog\\": "src/"
     }
   },
   "autoload-dev": {
@@ -31,6 +30,7 @@
     "twig/twig": "^3.0",
     "psr/http-server-handler": "^1.0",
     "ext-pdo": "*",
-    "beberlei/assert": "^3.3"
+    "beberlei/assert": "^3.3",
+    "alexandre-gerault/framwork-php": "^0.0.1"
   }
 }

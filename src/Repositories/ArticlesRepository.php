@@ -42,9 +42,32 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
     /** @throws Exception */
     public function getArticleBySlug(string $slug): Article
     {
+        $query = (new QueryBuilder())
+            ->select(['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.content', 'a.author_id', 'a.updated_at', 'u.name'])
+            ->from('articles', 'a')
+            ->innerJoin('users', 'u')
+            ->on('a.author_id', 'u.id')
+            ->where('a.slug', '=', ':slug')
+            ->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindParam(':slug', $slug);
+        $pdo->execute();
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+
+        return new Article(
+            id: $result['id'],
+            name: $result['title'],
+            slug: $result['slug'],
+            chapo: $result['chapo'],
+            content: $result['content'],
+            author: new User(name: $result['name']),
+            updatedAt: new DateTime($result['updated_at'])
+        );
     }
 
     public function getArticleById(int $id): Article
     {
+        // TODO: Implement getArticleById() method.
     }
 }
