@@ -4,12 +4,13 @@ namespace AGerault\Blog\Controllers;
 
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
+use Twig\Environment;
 
 class BaseController
 {
-    protected \Twig\Environment $twig;
+    protected Environment $twig;
 
-    public function __construct(\Twig\Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
