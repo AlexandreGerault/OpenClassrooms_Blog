@@ -40,11 +40,6 @@ class BlogController extends BaseController
         return $this->render('admin/blog/index.html.twig', compact('posts'));
     }
 
-    public function show()
-    {
-        return "Admin blog show";
-    }
-
     public function create()
     {
         return $this->render('admin/blog/create.html.twig');
