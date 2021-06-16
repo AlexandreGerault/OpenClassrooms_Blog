@@ -2,10 +2,13 @@
 
 namespace AGerault\Blog\Controllers\Admin;
 
-class DashboardController
+use AGerault\Blog\Controllers\BaseController;
+use Psr\Http\Message\ResponseInterface;
+
+class DashboardController extends BaseController
 {
-    public function __invoke()
+    public function __invoke(): ResponseInterface
     {
-        return "Admin dashboard";
+        return $this->render('admin/dashboard.twig.html');
     }
 }
