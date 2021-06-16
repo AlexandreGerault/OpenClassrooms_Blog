@@ -1,6 +1,7 @@
 <?php
 
 use \AGerault\Blog\Controllers\Admin\BlogController as AdminBlogController;
+use AGerault\Blog\Controllers\Admin\DashboardController;
 use AGerault\Blog\Controllers\Authentication\LoginController;
 use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
@@ -56,6 +57,12 @@ return [
     ],
 
     // Blog administration routes
+    [
+        'path' => '/admin',
+        'name' => 'admin.dashboard',
+        'method' => 'GET',
+        'action' => [DashboardController::class]
+    ],
     [
         'path' => '/admin/blog/create',
         'name' => 'admin.blog.create',
