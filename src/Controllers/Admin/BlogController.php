@@ -47,7 +47,7 @@ class BlogController extends BaseController
 
     public function create()
     {
-        return "Admin blog create";
+        return $this->render('admin/blog/create.html.twig');
     }
 
     public function store()
