@@ -70,17 +70,10 @@ return [
         'action' => [AdminBlogController::class, 'create']
     ],
     [
-        'path' => '/admin/blog/(.+)/([\d]+)/edit',
+        'path' => '/admin/blog/(.+)/([\d]+)',
         'name' => 'admin.blog.edit',
         'method' => 'GET',
         'action' => [AdminBlogController::class, 'edit'],
-        'parameters' => ['slug', 'id']
-    ],
-    [
-        'path' => '/admin/blog/(.+)/([\d]+)',
-        'name' => 'admin.blog.show',
-        'method' => 'GET',
-        'action' => [AdminBlogController::class, 'show'],
         'parameters' => ['slug', 'id']
     ],
     [
