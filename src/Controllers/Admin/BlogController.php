@@ -6,6 +6,7 @@ use AGerault\Blog\Contracts\Repositories\ArticlesRepositoryInterface;
 use AGerault\Blog\Controllers\BaseController;
 use AGerault\Blog\Services\AuthService;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\ServerRequest;
 use Psr\Http\Message\ResponseInterface;
 use Twig\Environment;
 
@@ -40,7 +41,7 @@ class BlogController extends BaseController
         return $this->render('admin/blog/index.html.twig', compact('posts'));
     }
 
-    public function create()
+    public function create(): ResponseInterface
     {
         return $this->render('admin/blog/create.html.twig');
     }
@@ -49,7 +50,7 @@ class BlogController extends BaseController
     {
     }
 
-    public function edit(ServerRequest $request, string $slug, int $id)
+    public function edit(ServerRequest $request, string $slug, int $id): ResponseInterface
     {
         $post = $this->repository->getArticleBySlug($slug);
 
