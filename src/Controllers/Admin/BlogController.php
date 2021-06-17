@@ -49,9 +49,11 @@ class BlogController extends BaseController
     {
     }
 
-    public function edit()
+    public function edit(ServerRequest $request, string $slug, int $id)
     {
-        return "Admin blog edit";
+        $post = $this->repository->getArticleBySlug($slug);
+
+        return $this->render('admin/blog/edit.html.twig', compact('post'));
     }
 
     public function update()
