@@ -70,4 +70,34 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
     {
         // TODO: Implement getArticleById() method.
     }
+
+    public function store(Article $post): void
+    {
+        $query = (new QueryBuilder())
+            ->from('articles')
+            ->insert(
+                [
+                    'title'      => 'title',
+                    'slug'       => 'slug',
+                    'chapo'      => 'chapo',
+                    'content'    => 'content',
+                    'author_id'  => 'author_id',
+                    'created_at' => 'created_at',
+                    'updated_at' => 'updated_at'
+                ]
+            )
+            ->toSQL();
+
+        $executeArray = [
+            ':title'      => $post->name(),
+            ':slug'       => $post->slug(),
+            ':chapo'      => $post->chapo(),
+            ':content'    => $post->content(),
+            ':author_id'  => $post->author()->id(),
+            ':created_at' => $post->created_at()->format('Y-m-d H:i:s'),
+            ':updated_at' => $post->created_at()->format('Y-m-d H:i:s'),
+        ];
+        $pdo          = $this->pdo->prepare($query);
+        $pdo->execute($executeArray);
+    }
 }
