@@ -12,4 +12,6 @@ interface ArticlesRepositoryInterface
     public function getArticleBySlug(string $slug): Article;
 
     public function getArticleById(int $id): Article;
+
+    public function store(Article $post): void;
 }
