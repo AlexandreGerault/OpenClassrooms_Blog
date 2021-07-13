@@ -50,12 +50,12 @@ class Article
         return $this->author;
     }
 
-    public function created_at(): DateTimeInterface
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function updated_at(): DateTimeInterface
+    public function updatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
     }
