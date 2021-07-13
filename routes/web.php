@@ -84,6 +84,13 @@ return [
         'parameters' => ['slug', 'id']
     ],
     [
+        'path' => '/admin/blog/(.+)/([\d]+)',
+        'name' => 'admin.blog.destroy',
+        'method' => 'DELETE',
+        'action' => [AdminBlogController::class, 'delete'],
+        'parameters' => ['slug', 'id']
+    ],
+    [
         'path' => '/admin/blog',
         'name' => 'admin.blog.index',
         'method' => 'GET',
