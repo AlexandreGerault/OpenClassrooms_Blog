@@ -10,7 +10,7 @@
 
 {% block content %}
     <section aria-labelledby="create_article">
-        <form action="#" method="POST">
+        <form action="/admin/blog/{{ post.slug }}/{{ post.id }}" method="POST">
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="bg-white py-6 px-4 sm:p-6">
                     <div>
@@ -35,7 +35,7 @@
                         <div>
                             <label for="chapo" class="block text-sm font-medium text-gray-700">Chapô</label>
                             <textarea name="chapo" id="chapo"
-                                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"></textarea>
+                                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">{{ post.chapo }}</textarea>
                         </div>
 
                         <div>
