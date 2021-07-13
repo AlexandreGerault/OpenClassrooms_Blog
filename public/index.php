@@ -3,7 +3,8 @@
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use AGerault\Framework\Core\Application;
-use AGerault\Framework\Core\HttpRequestHandler;
+use AGerault\Framework\HTTP\HttpRequestHandler;
+use AGerault\Framework\HTTP\MiddlewarePipe;
 use AGerault\Framework\Routing\RouteCollection;
 use AGerault\Framework\Routing\UrlMatcher;
 use AGerault\Framework\Services\ServiceContainer;
@@ -25,7 +26,8 @@ $app->registerRoutes(require dirname(__DIR__) . '/routes/web.php');
 $request = ServerRequest::fromGlobals();
 
 $urlMatcher  = new UrlMatcher($app->routes());
-$httpHandler = new HttpRequestHandler($urlMatcher);
+$middlewares = new MiddlewarePipe(require dirname(__DIR__) . '/config/middlewares.php');
+$httpHandler = new HttpRequestHandler($middlewares);
 $response    = $httpHandler->handle($request);
 
 if (headers_sent()) {
