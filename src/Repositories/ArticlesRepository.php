@@ -55,6 +55,10 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
         $pdo->execute();
         $result = $pdo->fetch(PDO::FETCH_ASSOC);
 
+        if (!$result) {
+            throw new Exception("Article not found");
+        }
+
         return new Article(
             id: $result['id'],
             name: $result['title'],
@@ -120,5 +124,18 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
         ];
         $pdo          = $this->pdo->prepare($query);
         $pdo->execute($executeArray);
+    }
+
+    public function update(int $id, array $values): void
+    {
+        $query = (new QueryBuilder())->from('articles')->update($values)->where('id', '=')->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindParam(':id', $id);
+        $pdo->bindParam(':title', $values['title']);
+        $pdo->bindParam(':chapo', $values['chapo']);
+        $pdo->bindParam(':content', $values['content']);
+        $pdo->bindParam(':slug', $values['slug']);
+        $pdo->execute();
     }
 }
