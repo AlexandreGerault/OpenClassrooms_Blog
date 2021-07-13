@@ -60,8 +60,18 @@ class BlogController extends BaseController
         return $this->render('admin/blog/edit.html.twig', compact('post'));
     }
 
-    public function update(ServerRequest $request)
+    public function update(ServerRequest $request, string $slug, int $id)
     {
+        $validator = new ArticleValidator($request->getParsedBody(), $this->pdo);
+
+        if ( ! $validator->isValid()) {
+            return new Response(400, [], "Bad Request");
+        }
+
+        $validated = $validator->validated();
+        $this->repository->update($id, $validated);
+
+        return $this->redirect("/admin/blog");
     }
 
     public function delete()
