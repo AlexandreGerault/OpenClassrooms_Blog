@@ -14,4 +14,6 @@ interface ArticlesRepositoryInterface
     public function getArticleById(int $id): Article;
 
     public function store(Article $post): void;
+
+    public function update(int $id, array $values): void;
 }
