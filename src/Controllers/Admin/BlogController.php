@@ -60,7 +60,7 @@ class BlogController extends BaseController
         return $this->render('admin/blog/edit.html.twig', compact('post'));
     }
 
-    public function update(ServerRequest $request, string $slug, int $id)
+    public function update(ServerRequest $request, string $slug, int $id): ResponseInterface
     {
         $validator = new ArticleValidator($request->getParsedBody(), $this->pdo);
 
@@ -74,7 +74,10 @@ class BlogController extends BaseController
         return $this->redirect("/admin/blog");
     }
 
-    public function delete()
+    public function delete(ServerRequest $request, string $slug, int $id): ResponseInterface
     {
+        $this->repository->delete($id);
+
+        return $this->redirect('/admin/blog');
     }
 }
