@@ -16,7 +16,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
     {
         $query = (new QueryBuilder())
             ->select(
-                ['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.author_id', 'a.updated_at', 'u.name']
+                ['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.author_id', 'a.created_at', 'a.updated_at', 'u.name']
             )
             ->from('articles', 'a')
             ->innerJoin('users', 'u')
@@ -33,6 +33,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
                 slug: $result['slug'],
                 chapo: $result['chapo'],
                 author: new User(name: $result["name"]),
+                createdAt: new DateTime($result['created_at']),
                 updatedAt: new DateTime($result['updated_at'])
             ),
             $pdo->fetchAll(PDO::FETCH_ASSOC)
@@ -43,7 +44,19 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
     public function getArticleBySlug(string $slug): Article
     {
         $query = (new QueryBuilder())
-            ->select(['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.content', 'a.author_id', 'a.updated_at', 'u.name'])
+            ->select(
+                [
+                    'a.id',
+                    'a.title',
+                    'a.slug',
+                    'a.chapo',
+                    'a.content',
+                    'a.author_id',
+                    'a.created_at',
+                    'a.updated_at',
+                    'u.name'
+                ]
+            )
             ->from('articles', 'a')
             ->innerJoin('users', 'u')
             ->on('a.author_id', 'u.id')
@@ -66,6 +79,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
             chapo: $result['chapo'],
             content: $result['content'],
             author: new User(name: $result['name']),
+            createdAt: new DateTime($result['created_at']),
             updatedAt: new DateTime($result['updated_at'])
         );
     }
@@ -73,7 +87,19 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
     public function getArticleById(int $id): Article
     {
         $query = (new QueryBuilder())
-            ->select(['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.content', 'a.author_id', 'a.updated_at', 'u.name'])
+            ->select(
+                [
+                    'a.id',
+                    'a.title',
+                    'a.slug',
+                    'a.chapo',
+                    'a.content',
+                    'a.author_id',
+                    'a.created_at',
+                    'a.updated_at',
+                    'u.name'
+                ]
+            )
             ->from('articles', 'a')
             ->innerJoin('users', 'u')
             ->on('a.author_id', 'u.id')
@@ -92,6 +118,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
             chapo: $result['chapo'],
             content: $result['content'],
             author: new User(name: $result['name']),
+            createdAt: new DateTime($result['created_at']),
             updatedAt: new DateTime($result['updated_at'])
         );
     }
@@ -136,6 +163,15 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
         $pdo->bindParam(':chapo', $values['chapo']);
         $pdo->bindParam(':content', $values['content']);
         $pdo->bindParam(':slug', $values['slug']);
+        $pdo->execute();
+    }
+
+    public function delete(int $id): void
+    {
+        $query = (new QueryBuilder())->from('article')->delete()->where('id', '=')->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindParam(':id', $id);
         $pdo->execute();
     }
 }

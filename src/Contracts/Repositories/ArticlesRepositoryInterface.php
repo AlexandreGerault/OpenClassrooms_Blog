@@ -16,4 +16,6 @@ interface ArticlesRepositoryInterface
     public function store(Article $post): void;
 
     public function update(int $id, array $values): void;
+
+    public function delete(int $id): void;
 }
