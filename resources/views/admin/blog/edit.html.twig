@@ -11,13 +11,14 @@
 {% block content %}
     <section aria-labelledby="create_article">
         <form action="/admin/blog/{{ post.slug }}/{{ post.id }}" method="POST">
+            {{ csrf() | raw }}
             <input type="hidden" name="_method" value="PUT" />
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="bg-white py-6 px-4 sm:p-6">
                     <div>
                         <h2 id="create_article" class="text-lg leading-6 font-medium text-gray-900">Édition d&apos;un article</h2>
                         <p class="mt-1 text-sm text-gray-500">Renseignez les différents champs ci dessous pour modifier
-                            l&apos;post.</p>
+                            l&apos;article.</p>
                     </div>
 
                     <div class="mt-6 flex flex-col gap-4">
