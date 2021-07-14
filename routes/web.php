@@ -1,6 +1,7 @@
 <?php
 
 use \AGerault\Blog\Controllers\Admin\BlogController as AdminBlogController;
+use AGerault\Blog\Controllers\Admin\DashboardController;
 use AGerault\Blog\Controllers\Authentication\LoginController;
 use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
@@ -57,13 +58,19 @@ return [
 
     // Blog administration routes
     [
+        'path' => '/admin',
+        'name' => 'admin.dashboard',
+        'method' => 'GET',
+        'action' => [DashboardController::class]
+    ],
+    [
         'path' => '/admin/blog/create',
         'name' => 'admin.blog.create',
         'method' => 'GET',
         'action' => [AdminBlogController::class, 'create']
     ],
     [
-        'path' => '/admin/blog/(.+)/([\d]+)/edit',
+        'path' => '/admin/blog/(.+)/([\d]+)',
         'name' => 'admin.blog.edit',
         'method' => 'GET',
         'action' => [AdminBlogController::class, 'edit'],
@@ -71,16 +78,16 @@ return [
     ],
     [
         'path' => '/admin/blog/(.+)/([\d]+)',
-        'name' => 'admin.blog.show',
-        'method' => 'GET',
-        'action' => [AdminBlogController::class, 'show'],
+        'name' => 'admin.blog.update',
+        'method' => 'PUT',
+        'action' => [AdminBlogController::class, 'update'],
         'parameters' => ['slug', 'id']
     ],
     [
         'path' => '/admin/blog/(.+)/([\d]+)',
-        'name' => 'admin.blog.update',
-        'method' => 'PUT',
-        'action' => [AdminBlogController::class, 'update'],
+        'name' => 'admin.blog.destroy',
+        'method' => 'DELETE',
+        'action' => [AdminBlogController::class, 'delete'],
         'parameters' => ['slug', 'id']
     ],
     [
