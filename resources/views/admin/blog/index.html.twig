@@ -79,7 +79,8 @@
                                                 </svg>
                                             </a>
 
-                                            <form method="post" action="/admin/blog/">
+                                            <form method="post" action="/admin/blog/{{ post.slug }}/{{ post.id }}">
+                                                {{ csrf() | raw }}
                                                 <input type="hidden" name="_method" value="DELETE" />
                                                 <button>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
