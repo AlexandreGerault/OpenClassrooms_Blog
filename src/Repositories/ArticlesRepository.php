@@ -146,8 +146,8 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
             ':chapo'      => $post->chapo(),
             ':content'    => $post->content(),
             ':author_id'  => $post->author()->id(),
-            ':created_at' => $post->created_at()->format('Y-m-d H:i:s'),
-            ':updated_at' => $post->created_at()->format('Y-m-d H:i:s'),
+            ':created_at' => $post->createdAt()->format('Y-m-d H:i:s'),
+            ':updated_at' => $post->createdAt()->format('Y-m-d H:i:s'),
         ];
         $pdo          = $this->pdo->prepare($query);
         $pdo->execute($executeArray);
@@ -168,7 +168,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
 
     public function delete(int $id): void
     {
-        $query = (new QueryBuilder())->from('article')->delete()->where('id', '=')->toSQL();
+        $query = (new QueryBuilder())->from('articles')->delete()->where('id', '=')->toSQL();
 
         $pdo = $this->pdo->prepare($query);
         $pdo->bindParam(':id', $id);
