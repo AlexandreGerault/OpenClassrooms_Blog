@@ -16,7 +16,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
     {
         $query = (new QueryBuilder())
             ->select(
-                ['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.author_id', 'a.updated_at', 'u.name']
+                ['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.author_id', 'a.created_at', 'a.updated_at', 'u.name']
             )
             ->from('articles', 'a')
             ->innerJoin('users', 'u')
@@ -33,6 +33,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
                 slug: $result['slug'],
                 chapo: $result['chapo'],
                 author: new User(name: $result["name"]),
+                createdAt: new DateTime($result['created_at']),
                 updatedAt: new DateTime($result['updated_at'])
             ),
             $pdo->fetchAll(PDO::FETCH_ASSOC)
@@ -43,7 +44,19 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
     public function getArticleBySlug(string $slug): Article
     {
         $query = (new QueryBuilder())
-            ->select(['a.id', 'a.title', 'a.slug', 'a.chapo', 'a.content', 'a.author_id', 'a.updated_at', 'u.name'])
+            ->select(
+                [
+                    'a.id',
+                    'a.title',
+                    'a.slug',
+                    'a.chapo',
+                    'a.content',
+                    'a.author_id',
+                    'a.created_at',
+                    'a.updated_at',
+                    'u.name'
+                ]
+            )
             ->from('articles', 'a')
             ->innerJoin('users', 'u')
             ->on('a.author_id', 'u.id')
@@ -55,6 +68,10 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
         $pdo->execute();
         $result = $pdo->fetch(PDO::FETCH_ASSOC);
 
+        if (!$result) {
+            throw new Exception("Article not found");
+        }
+
         return new Article(
             id: $result['id'],
             name: $result['title'],
@@ -62,12 +79,99 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
             chapo: $result['chapo'],
             content: $result['content'],
             author: new User(name: $result['name']),
+            createdAt: new DateTime($result['created_at']),
             updatedAt: new DateTime($result['updated_at'])
         );
     }
 
     public function getArticleById(int $id): Article
     {
-        // TODO: Implement getArticleById() method.
+        $query = (new QueryBuilder())
+            ->select(
+                [
+                    'a.id',
+                    'a.title',
+                    'a.slug',
+                    'a.chapo',
+                    'a.content',
+                    'a.author_id',
+                    'a.created_at',
+                    'a.updated_at',
+                    'u.name'
+                ]
+            )
+            ->from('articles', 'a')
+            ->innerJoin('users', 'u')
+            ->on('a.author_id', 'u.id')
+            ->where('a.id', '=', ':id')
+            ->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindParam(':id', $id);
+        $pdo->execute();
+        $result = $pdo->fetch(PDO::FETCH_ASSOC);
+
+        return new Article(
+            id: $result['id'],
+            name: $result['title'],
+            slug: $result['slug'],
+            chapo: $result['chapo'],
+            content: $result['content'],
+            author: new User(name: $result['name']),
+            createdAt: new DateTime($result['created_at']),
+            updatedAt: new DateTime($result['updated_at'])
+        );
+    }
+
+    public function store(Article $post): void
+    {
+        $query = (new QueryBuilder())
+            ->from('articles')
+            ->insert(
+                [
+                    'title'      => 'title',
+                    'slug'       => 'slug',
+                    'chapo'      => 'chapo',
+                    'content'    => 'content',
+                    'author_id'  => 'author_id',
+                    'created_at' => 'created_at',
+                    'updated_at' => 'updated_at'
+                ]
+            )
+            ->toSQL();
+
+        $executeArray = [
+            ':title'      => $post->name(),
+            ':slug'       => $post->slug(),
+            ':chapo'      => $post->chapo(),
+            ':content'    => $post->content(),
+            ':author_id'  => $post->author()->id(),
+            ':created_at' => $post->createdAt()->format('Y-m-d H:i:s'),
+            ':updated_at' => $post->createdAt()->format('Y-m-d H:i:s'),
+        ];
+        $pdo          = $this->pdo->prepare($query);
+        $pdo->execute($executeArray);
+    }
+
+    public function update(int $id, array $values): void
+    {
+        $query = (new QueryBuilder())->from('articles')->update($values)->where('id', '=')->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindParam(':id', $id);
+        $pdo->bindParam(':title', $values['title']);
+        $pdo->bindParam(':chapo', $values['chapo']);
+        $pdo->bindParam(':content', $values['content']);
+        $pdo->bindParam(':slug', $values['slug']);
+        $pdo->execute();
+    }
+
+    public function delete(int $id): void
+    {
+        $query = (new QueryBuilder())->from('articles')->delete()->where('id', '=')->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindParam(':id', $id);
+        $pdo->execute();
     }
 }

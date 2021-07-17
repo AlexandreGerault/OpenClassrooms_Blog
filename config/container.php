@@ -1,17 +1,19 @@
 <?php
 
-use AGerault\Blog\Contracts\Repositories\UsersRepositoryInterface;
-use AGerault\Framework\Contracts\Session\SessionInterface;
-use Twig\Environment;
-use Twig\Loader\LoaderInterface;
-use Twig\Loader\FilesystemLoader;
-use AGerault\Blog\Repositories\UsersRepository;
-use AGerault\Blog\Repositories\ArticlesRepository;
-use AGerault\Framework\Contracts\Core\ApplicationInterface;
 use AGerault\Blog\Contracts\Repositories\ArticlesRepositoryInterface;
+use AGerault\Blog\Contracts\Repositories\UsersRepositoryInterface;
+use AGerault\Blog\Repositories\ArticlesRepository;
+use AGerault\Blog\Repositories\UsersRepository;
 use AGerault\Framework\Authentication\Authenticator;
-use AGerault\Framework\Contracts\Authentication\AuthenticatorInterface;
 use AGerault\Framework\Contracts\Authentication\AuthenticatableProviderInterface;
+use AGerault\Framework\Contracts\Authentication\AuthenticatorInterface;
+use AGerault\Framework\Contracts\Core\ApplicationInterface;
+use AGerault\Framework\Contracts\Services\ServiceContainerInterface;
+use AGerault\Framework\Contracts\Session\SessionInterface;
+use Grafikart\Csrf\CsrfMiddleware;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+use Twig\Loader\LoaderInterface;
 
 /**
  * @var ApplicationInterface $app
@@ -33,7 +35,17 @@ $app->container()->addFactory(
         $host = getenv('DB_HOST');
         $user = getenv('DB_USER');
         $pass = getenv('DB_PASSWORD');
+
         return new PDO("mysql:dbname={$name};host={$host};", $user, $pass);
+    }
+);
+
+$app->container()->addFactory(
+    CsrfMiddleware::class,
+    function (ServiceContainerInterface $container) {
+        $session = $container->get(SessionInterface::class);
+
+        return new CsrfMiddleware($session);
     }
 );
 

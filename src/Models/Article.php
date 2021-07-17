@@ -50,13 +50,25 @@ class Article
         return $this->author;
     }
 
-    public function created_at(): DateTimeInterface
+    public function createdAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function updated_at(): DateTimeInterface
+    public function updatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
+    }
+
+    public static function fromArray(array $inputs): Article
+    {
+        return new self(
+            name: $inputs['title'],
+            slug: $inputs['slug'],
+            chapo: $inputs['chapo'],
+            content: $inputs['content'],
+            author: $inputs['user'],
+            createdAt: $inputs['createdAt']
+        );
     }
 }

@@ -52,8 +52,8 @@ class LoginController extends BaseController
 
         // Authentication
         try {
-            $user = $this->login->attempt($validated['email'], $validated['password']);
-            return new Response(200, [], 'Valid credentials');
+            $this->login->attempt($validated['email'], $validated['password']);
+            return $this->redirect('/');
         } catch (AuthenticatableNotFoundException $exception) {
             return new Response(400, [], $exception->getMessage());
         }

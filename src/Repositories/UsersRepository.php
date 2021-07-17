@@ -21,6 +21,7 @@ class UsersRepository extends BaseRepository implements AuthenticatableProviderI
         $queryResult = $query->fetch(PDO::FETCH_ASSOC);
 
         return $queryResult ? new User(
+            $queryResult['id'],
             $queryResult['name'],
             $queryResult['email'],
             $queryResult['password'],

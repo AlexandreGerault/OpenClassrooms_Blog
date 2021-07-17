@@ -1,0 +1,59 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}
+    Éditer {{ post.name }}
+{% endblock %}
+
+{% block heading %}
+    Édition de l&apos;article "{{ post.name }}"
+{% endblock %}
+
+{% block content %}
+    <section aria-labelledby="create_article">
+        <form action="/admin/blog/{{ post.slug }}/{{ post.id }}" method="POST">
+            {{ csrf() | raw }}
+            <input type="hidden" name="_method" value="PUT" />
+            <div class="shadow sm:rounded-md sm:overflow-hidden">
+                <div class="bg-white py-6 px-4 sm:p-6">
+                    <div>
+                        <h2 id="create_article" class="text-lg leading-6 font-medium text-gray-900">Édition d&apos;un article</h2>
+                        <p class="mt-1 text-sm text-gray-500">Renseignez les différents champs ci dessous pour modifier
+                            l&apos;article.</p>
+                    </div>
+
+                    <div class="mt-6 flex flex-col gap-4">
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-gray-700">Titre</label>
+                            <input type="text" name="title" id="title" value="{{ post.name }}"
+                                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div>
+                            <label for="slug" class="block text-sm font-medium text-gray-700">Slug</label>
+                            <input type="text" name="slug" id="slug" value="{{ post.slug }}"
+                                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">
+                        </div>
+
+                        <div>
+                            <label for="chapo" class="block text-sm font-medium text-gray-700">Chapô</label>
+                            <textarea name="chapo" id="chapo"
+                                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">{{ post.chapo }}</textarea>
+                        </div>
+
+                        <div>
+                            <label for="content" class="block text-sm font-medium text-gray-700">Contenu</label>
+                            <textarea name="content" id="content"
+                                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm">{{ post.content }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                    <button type="submit"
+                            class="bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
+                        Publier l&apos;article
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+{% endblock %}
