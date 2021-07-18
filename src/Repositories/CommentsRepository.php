@@ -72,4 +72,19 @@ class CommentsRepository implements CommentsRepositoryInterface
 
         $pdo->execute();
     }
+
+    public function invalidComment(int $id): void
+    {
+        $query = (new QueryBuilder())
+            ->from('comments', 'c')
+            ->update(['validated' => 'validated'])
+            ->where('id', '=', ':id')
+            ->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindValue(':validated', 0);
+        $pdo->bindValue(':id', $id);
+
+        $pdo->execute();
+    }
 }

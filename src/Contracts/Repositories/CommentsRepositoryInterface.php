@@ -15,4 +15,6 @@ interface CommentsRepositoryInterface
     public function createCommentToBeValidatedToPost(Article $article, array $values): void;
 
     public function validComment(int $id): void;
+
+    public function invalidComment(int $id): void;
 }

@@ -67,6 +67,20 @@ return [
 
     // Comment administration routes
     [
+        'path' => '/admin/comments/([\d]+)/valid',
+        'name' => 'admin.comments.valid',
+        'method' => 'PATCH',
+        'action' => [CommentsController::class, 'validComment'],
+        'parameters' => ['id']
+    ],
+    [
+        'path' => '/admin/comments/([\d]+)/invalid',
+        'name' => 'admin.comments.invalid',
+        'method' => 'PATCH',
+        'action' => [CommentsController::class, 'invalidComment'],
+        'parameters' => ['id']
+    ],
+    [
         'path' => '/admin/comments',
         'name' => 'admin.comments.index',
         'method' => 'GET',
