@@ -37,4 +37,11 @@ class CommentsController extends BaseController
 
         return $this->redirect('/admin/comments');
     }
+
+    public function delete(ServerRequestInterface $request, int $id): ResponseInterface
+    {
+        $this->commentsRepository->delete($id);
+
+        return $this->redirect('/admin/comments');
+    }
 }
