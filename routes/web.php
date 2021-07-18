@@ -1,6 +1,7 @@
 <?php
 
 use \AGerault\Blog\Controllers\Admin\BlogController as AdminBlogController;
+use AGerault\Blog\Controllers\Admin\CommentsController;
 use AGerault\Blog\Controllers\Admin\DashboardController;
 use AGerault\Blog\Controllers\Authentication\LoginController;
 use AGerault\Blog\Controllers\Authentication\RegistrationController;
@@ -62,6 +63,14 @@ return [
         'name' => 'blog.index',
         'method' => 'GET',
         'action' => [BlogController::class, 'index']
+    ],
+
+    // Comment administration routes
+    [
+        'path' => '/admin/comments',
+        'name' => 'admin.comments.index',
+        'method' => 'GET',
+        'action' => [CommentsController::class, 'index']
     ],
 
     // Blog administration routes

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b008f1d54aa7584b28514d75a2f0e20",
+    "content-hash": "377dcc5f6536d26974943d502ad94bb7",
     "packages": [
         {
             "name": "alexandre-gerault/framwork-php",
-            "version": "0.0.3",
+            "version": "0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AlexandreGerault/phramework.git",
-                "reference": "052663ea1a51ee27c124b1d1f5c11cb55f08994b"
+                "reference": "7134ea1d6d741e7b16b2fdaf784ec1caec678a54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AlexandreGerault/phramework/zipball/052663ea1a51ee27c124b1d1f5c11cb55f08994b",
-                "reference": "052663ea1a51ee27c124b1d1f5c11cb55f08994b",
+                "url": "https://api.github.com/repos/AlexandreGerault/phramework/zipball/7134ea1d6d741e7b16b2fdaf784ec1caec678a54",
+                "reference": "7134ea1d6d741e7b16b2fdaf784ec1caec678a54",
                 "shasum": ""
             },
             "require": {
@@ -57,9 +57,9 @@
             "description": "A modern PHP framework",
             "support": {
                 "issues": "https://github.com/AlexandreGerault/phramework/issues",
-                "source": "https://github.com/AlexandreGerault/phramework/tree/0.0.3"
+                "source": "https://github.com/AlexandreGerault/phramework/tree/0.0.4"
             },
-            "time": "2021-07-13T13:27:37+00:00"
+            "time": "2021-07-18T14:01:52+00:00"
         },
         {
             "name": "beberlei/assert",
