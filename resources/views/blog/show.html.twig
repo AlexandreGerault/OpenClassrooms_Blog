@@ -60,7 +60,8 @@
         <h3 class="text-3xl font-bold mb-4">Espace commentaires</h3>
 
         <div class="bg-white shadow-lg rounded px-8 py-6">
-            <form class="flex flex-col gap-4">
+            <form class="flex flex-col gap-4" method="post" action="/blog/{{ article.slug }}/{{ article.id }}/comment">
+                {{ csrf() | raw }}
                 <div class="flex flex-col sm:flex-row gap-4">
                     <div class="flex-1">
                         <label for="email" class="block text-sm font-medium text-gray-700">Adresse mail</label>
