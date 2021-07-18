@@ -87,4 +87,17 @@ class CommentsRepository implements CommentsRepositoryInterface
 
         $pdo->execute();
     }
+
+    public function delete(int $id): void
+    {
+        $query = (new QueryBuilder())
+            ->from('comments')
+            ->delete()
+            ->where('id', '=', ':id')
+            ->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindValue(':id', $id);
+        $pdo->execute();
+    }
 }
