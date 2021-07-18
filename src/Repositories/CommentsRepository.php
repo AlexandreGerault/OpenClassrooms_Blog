@@ -46,6 +46,7 @@ class CommentsRepository implements CommentsRepositoryInterface
 
         return array_map(
             fn (array $values) => new Comment(
+                id: $values['comments_id'],
                 name: $values['comments_name'],
                 email: $values['comments_email'],
                 content: $values['comments_content'],
@@ -55,5 +56,20 @@ class CommentsRepository implements CommentsRepositoryInterface
             ),
             $pdo->fetchAll()
         );
+    }
+
+    public function validComment(int $id): void
+    {
+        $query = (new QueryBuilder())
+            ->from('comments', 'c')
+            ->update(['validated' => 'validated'])
+            ->where('id', '=', ':id')
+            ->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindValue(':validated', 1);
+        $pdo->bindValue(':id', $id);
+
+        $pdo->execute();
     }
 }
