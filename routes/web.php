@@ -8,6 +8,7 @@ use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
 use AGerault\Blog\Controllers\SubmitCommentController;
 use AGerault\Blog\Controllers\HomeController;
+use AGerault\Blog\Controllers\SessionDestroyerController;
 
 return [
     [
@@ -81,6 +82,13 @@ return [
         'parameters' => ['id']
     ],
     [
+        'path' => '/admin/comments/([\d]+)',
+        'name' => 'admin.comments.destroy',
+        'method' => 'DELETE',
+        'action' => [CommentsController::class, 'delete'],
+        'parameters' => ['id']
+    ],
+    [
         'path' => '/admin/comments',
         'name' => 'admin.comments.index',
         'method' => 'GET',
@@ -132,5 +140,12 @@ return [
         'name' => 'admin.blog.store',
         'method' => 'POST',
         'action' => [AdminBlogController::class, 'store']
+    ],
+
+    [
+        'path' => '/session/clear',
+        'name' => 'session.clear',
+        'method' => 'GET',
+        'action' => [SessionDestroyerController::class]
     ],
 ];
