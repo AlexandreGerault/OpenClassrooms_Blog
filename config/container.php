@@ -1,8 +1,10 @@
 <?php
 
 use AGerault\Blog\Contracts\Repositories\ArticlesRepositoryInterface;
+use AGerault\Blog\Contracts\Repositories\CommentsRepositoryInterface;
 use AGerault\Blog\Contracts\Repositories\UsersRepositoryInterface;
 use AGerault\Blog\Repositories\ArticlesRepository;
+use AGerault\Blog\Repositories\CommentsRepository;
 use AGerault\Blog\Repositories\UsersRepository;
 use AGerault\Framework\Authentication\Authenticator;
 use AGerault\Framework\Contracts\Authentication\AuthenticatableProviderInterface;
@@ -50,6 +52,7 @@ $app->container()->addFactory(
 );
 
 $app->container()->addAlias(ArticlesRepositoryInterface::class, ArticlesRepository::class);
+$app->container()->addAlias(CommentsRepositoryInterface::class, CommentsRepository::class);
 $app->container()->addAlias(LoaderInterface::class, FilesystemLoader::class);
 $app->container()->addAlias(AuthenticatableProviderInterface::class, UsersRepository::class);
 $app->container()->addAlias(UsersRepositoryInterface::class, UsersRepository::class);
