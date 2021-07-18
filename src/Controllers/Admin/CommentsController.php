@@ -30,4 +30,11 @@ class CommentsController extends BaseController
 
         return $this->redirect('/admin/comments');
     }
+
+    public function invalidComment(ServerRequestInterface $request, int $id): ResponseInterface
+    {
+        $this->commentsRepository->invalidComment($id);
+
+        return $this->redirect('/admin/comments');
+    }
 }
