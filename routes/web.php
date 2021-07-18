@@ -5,6 +5,7 @@ use AGerault\Blog\Controllers\Admin\DashboardController;
 use AGerault\Blog\Controllers\Authentication\LoginController;
 use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
+use AGerault\Blog\Controllers\SubmitCommentController;
 use AGerault\Blog\Controllers\HomeController;
 
 return [
@@ -42,6 +43,13 @@ return [
     ],
 
     // Blog routes
+    [
+        'path' => '/blog/(.+)/([\d]+)/comment',
+        'name' => 'comment.handleSubmit',
+        'method' => 'POST',
+        'action' => [SubmitCommentController::class],
+        'parameters' => ['slug', 'id']
+    ],
     [
         'path' => '/blog/(.+)/([\d]+)',
         'name' => 'blog.show',
