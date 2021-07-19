@@ -100,4 +100,34 @@ class CommentsRepository implements CommentsRepositoryInterface
         $pdo->bindValue(':id', $id);
         $pdo->execute();
     }
+
+    public function get(int $id): Comment
+    {
+        $query = (new QueryBuilder())
+            ->withAliasPrefixOnColumns()
+            ->from('comments', 'c')
+            ->select(['id', 'email', 'name', 'content', 'validated', 'created_at'])
+            ->selectOnJoinTable(['title'])
+            ->innerJoin('articles', 'a')
+            ->on('c.article_id', 'a.id')
+            ->where('c.id', '=', ':id')
+            ->toSQL();
+
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindValue(':id', $id);
+        $pdo->execute();
+
+        $result = $pdo->fetch();
+
+        return new Comment(
+            id: $result['comments_id'],
+            name: $result['comments_name'],
+            email: $result['comments_email'],
+            content: $result['comments_content'],
+            createdAt: new DateTime($result['comments_created_at']),
+            validated: $result['comments_validated'],
+            article: new Article(name: $result['articles_title'])
+        );
+    }
 }
