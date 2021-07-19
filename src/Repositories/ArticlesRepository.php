@@ -4,6 +4,7 @@ namespace AGerault\Blog\Repositories;
 
 use AGerault\Blog\Contracts\Repositories\ArticlesRepositoryInterface;
 use AGerault\Blog\Models\Article;
+use AGerault\Blog\Models\Comment;
 use AGerault\Blog\Models\User;
 use AGerault\Framework\Database\QueryBuilder;
 use DateTime;
@@ -68,7 +69,7 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
         $pdo->execute();
         $result = $pdo->fetch(PDO::FETCH_ASSOC);
 
-        if (!$result) {
+        if ( ! $result) {
             throw new Exception("Article not found");
         }
 
@@ -129,11 +130,11 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
             ->from('articles')
             ->insert(
                 [
-                    'title'      => 'title',
-                    'slug'       => 'slug',
-                    'chapo'      => 'chapo',
-                    'content'    => 'content',
-                    'author_id'  => 'author_id',
+                    'title' => 'title',
+                    'slug' => 'slug',
+                    'chapo' => 'chapo',
+                    'content' => 'content',
+                    'author_id' => 'author_id',
                     'created_at' => 'created_at',
                     'updated_at' => 'updated_at'
                 ]
@@ -141,11 +142,11 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
             ->toSQL();
 
         $executeArray = [
-            ':title'      => $post->name(),
-            ':slug'       => $post->slug(),
-            ':chapo'      => $post->chapo(),
-            ':content'    => $post->content(),
-            ':author_id'  => $post->author()->id(),
+            ':title' => $post->name(),
+            ':slug' => $post->slug(),
+            ':chapo' => $post->chapo(),
+            ':content' => $post->content(),
+            ':author_id' => $post->author()->id(),
             ':created_at' => $post->createdAt()->format('Y-m-d H:i:s'),
             ':updated_at' => $post->createdAt()->format('Y-m-d H:i:s'),
         ];
@@ -173,5 +174,47 @@ class ArticlesRepository extends BaseRepository implements ArticlesRepositoryInt
         $pdo = $this->pdo->prepare($query);
         $pdo->bindParam(':id', $id);
         $pdo->execute();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getArticleBySlugWithValidatedComments(string $slug): Article
+    {
+        $article = $this->getArticleBySlug($slug);
+
+        $query = (new QueryBuilder())
+            ->select(['article_id', 'email', 'name', 'content', 'validated', 'created_at'])
+            ->selectOnJoinTable(['content'])
+            ->withAliasPrefixOnColumns()
+            ->from('comments', 'c')
+            ->innerJoin('articles', 'a')
+            ->on('c.article_id', 'a.id')
+            ->where('article_id', '=', ':article_id')
+            ->where('validated', '=', ':validated')
+            ->toSQL();
+
+        $pdo = $this->pdo->prepare($query);
+        $pdo->bindValue(':article_id', $article->id());
+        $pdo->bindValue(':validated', 1);
+        $pdo->execute();
+
+        $comments = array_map(fn (array $values) => new Comment(
+            name: $values['comments_name'],
+            email: $values['comments_email'],
+            content: $values['comments_content']
+        ), $pdo->fetchAll());
+
+        return new Article(
+            id: $article->id(),
+            name: $article->name(),
+            slug: $article->slug(),
+            chapo: $article->chapo(),
+            content: $article->content(),
+            author: $article->author(),
+            createdAt: $article->createdAt(),
+            updatedAt: $article->updatedAt(),
+            comments: $comments
+        );
     }
 }
