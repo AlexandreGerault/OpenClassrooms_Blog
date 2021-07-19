@@ -16,7 +16,8 @@ class Article
         protected ?string $content = null,
         protected ?User $author = null,
         protected ?DateTimeInterface $createdAt = null,
-        protected ?DateTimeInterface $updatedAt = null
+        protected ?DateTimeInterface $updatedAt = null,
+        protected array $comments = []
     ) {
     }
 
@@ -58,6 +59,14 @@ class Article
     public function updatedAt(): DateTimeInterface
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return array<Comment>
+     */
+    public function comments(): array
+    {
+        return $this->comments;
     }
 
     public static function fromArray(array $inputs): Article
