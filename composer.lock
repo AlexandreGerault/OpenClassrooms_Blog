@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "377dcc5f6536d26974943d502ad94bb7",
+    "content-hash": "441a7f9865b7a326c0d34d770c7d4165",
     "packages": [
         {
             "name": "alexandre-gerault/framwork-php",
-            "version": "0.0.4",
+            "version": "0.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AlexandreGerault/phramework.git",
-                "reference": "7134ea1d6d741e7b16b2fdaf784ec1caec678a54"
+                "reference": "68b5c6bb84bb6715b40bf302afa47b74bf31a179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AlexandreGerault/phramework/zipball/7134ea1d6d741e7b16b2fdaf784ec1caec678a54",
-                "reference": "7134ea1d6d741e7b16b2fdaf784ec1caec678a54",
+                "url": "https://api.github.com/repos/AlexandreGerault/phramework/zipball/68b5c6bb84bb6715b40bf302afa47b74bf31a179",
+                "reference": "68b5c6bb84bb6715b40bf302afa47b74bf31a179",
                 "shasum": ""
             },
             "require": {
@@ -57,9 +57,9 @@
             "description": "A modern PHP framework",
             "support": {
                 "issues": "https://github.com/AlexandreGerault/phramework/issues",
-                "source": "https://github.com/AlexandreGerault/phramework/tree/0.0.4"
+                "source": "https://github.com/AlexandreGerault/phramework/tree/0.0.5"
             },
-            "time": "2021-07-18T14:01:52+00:00"
+            "time": "2021-07-19T20:07:31+00:00"
         },
         {
             "name": "beberlei/assert",
@@ -1835,16 +1835,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.6",
+            "version": "9.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb"
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
-                "reference": "fb9b8333f14e3dce976a60ef6a7e05c7c7ed8bfb",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d0dc8b6999c937616df4fb046792004b33fd31c5",
+                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5",
                 "shasum": ""
             },
             "require": {
@@ -1922,7 +1922,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.6"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.7"
             },
             "funding": [
                 {
@@ -1934,7 +1934,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-23T05:14:38+00:00"
+            "time": "2021-07-19T06:14:47+00:00"
         },
         {
             "name": "psr/log",
