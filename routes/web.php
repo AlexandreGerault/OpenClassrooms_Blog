@@ -8,7 +8,7 @@ use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
 use AGerault\Blog\Controllers\SubmitCommentController;
 use AGerault\Blog\Controllers\HomeController;
-use AGerault\Blog\Controllers\SessionDestroyerController;
+use AGerault\Blog\Controllers\Logout;
 
 return [
     [
@@ -150,9 +150,9 @@ return [
     ],
 
     [
-        'path' => '/session/clear',
-        'name' => 'session.clear',
+        'path' => '/auth/logout',
+        'name' => 'auth.logout',
         'method' => 'GET',
-        'action' => [SessionDestroyerController::class]
+        'action' => [Logout::class]
     ],
 ];

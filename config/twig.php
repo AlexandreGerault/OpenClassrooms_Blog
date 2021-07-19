@@ -10,6 +10,7 @@ use AGerault\Blog\Twig\CsrfTwigExtension;
 use AGerault\Blog\Twig\RouteTwigExtension;
 use AGerault\Framework\Contracts\Core\ApplicationInterface;
 use Grafikart\Csrf\CsrfMiddleware;
+use GuzzleHttp\Psr7\ServerRequest;
 use Twig\Environment;
 use Twig\Extra\Markdown\DefaultMarkdown;
 use Twig\Extra\Markdown\MarkdownExtension;
@@ -25,7 +26,7 @@ $twig = $app->container()->get(Environment::class);
 $twig->addExtension(new AuthTwigExtension($app->container()->get(AuthService::class)));
 $twig->addExtension(new CsrfTwigExtension($app->container()->get(CsrfMiddleware::class)));
 $twig->addExtension(new MarkdownExtension());
-$twig->addExtension(new RouteTwigExtension($request));
+$twig->addExtension(new RouteTwigExtension($request ?? ServerRequest::fromGlobals()));
 $twig->addRuntimeLoader(new class implements RuntimeLoaderInterface {
     public function load($class): MarkdownRuntime
     {
