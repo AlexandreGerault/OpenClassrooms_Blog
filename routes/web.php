@@ -89,6 +89,13 @@ return [
         'parameters' => ['id']
     ],
     [
+        'path' => '/admin/comments/([\d]+)',
+        'name' => 'admin.comments.show',
+        'method' => 'GET',
+        'action' => [CommentsController::class, 'show'],
+        'parameters' => ['id']
+    ],
+    [
         'path' => '/admin/comments',
         'name' => 'admin.comments.index',
         'method' => 'GET',
