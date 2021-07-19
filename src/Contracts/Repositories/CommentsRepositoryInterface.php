@@ -19,4 +19,6 @@ interface CommentsRepositoryInterface
     public function invalidComment(int $id): void;
 
     public function delete(int $id): void;
+
+    public function get(int $id): Comment;
 }

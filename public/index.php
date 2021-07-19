@@ -18,12 +18,13 @@ $whoops = new Run;
 $whoops->pushHandler(new PrettyPageHandler);
 $whoops->register();
 
+$request = ServerRequest::fromGlobals();
+
 $app = new Application(new ServiceContainer(), new RouteCollection());
 include_once(dirname(__DIR__) . '/config/container.php');
 
 $app->registerRoutes(require dirname(__DIR__) . '/routes/web.php');
 
-$request = ServerRequest::fromGlobals();
 
 $urlMatcher  = new UrlMatcher($app->routes());
 $middlewares = new MiddlewarePipe(require dirname(__DIR__) . '/config/middlewares.php');
