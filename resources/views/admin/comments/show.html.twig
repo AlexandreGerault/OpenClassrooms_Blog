@@ -1,0 +1,60 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}
+    Détails d&apos;un commentaire
+{% endblock %}
+
+{% block heading %}
+    Détails d&apos;un commentaire
+{% endblock %}
+
+{% block content %}
+    <section aria-labelledby="comment_details">
+        <div class="shadow sm:rounded-md sm:overflow-hidden">
+            <div class="bg-white py-6 px-4 sm:p-6">
+                <div>
+                    <h2 id="create_article" class="text-lg leading-6 font-medium text-gray-900">
+                        Détails du commentaire
+                    </h2>
+                    <p class="mt-1 text-sm text-gray-500">
+                        Ci-dessous le contenu du commentaire de {{ comment.name }} ({{ comment.email }}) à propos de
+                        l&apos;article <em>{{ comment.article.name }}</em>.
+                    </p>
+                </div>
+
+                <div class="flex my-2 gap-4">
+                    {% if not comment.validated %}
+                        <form method="post" action="/admin/comments/{{ comment.id }}/valid">
+                            {{ csrf() | raw }}
+                            <input type="hidden" name="_method" value="PATCH"/>
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Valider le commentaire
+                            </button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="/admin/comments/{{ comment.id }}/invalid">
+                            {{ csrf() | raw }}
+                            <input type="hidden" name="_method" value="PATCH"/>
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Invalider le commentaire
+                            </button>
+                        </form>
+                    {% endif %}
+
+                    <form method="post" action="/admin/comments/{{ comment.id }}">
+                        {{ csrf() | raw }}
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Supprimer ce commentaire
+                        </button>
+                    </form>
+                </div>
+
+                <p class="my-2 text-small text-gray-900">Publié le {{ comment.createdAt | date('j F Y') }} à {{ comment.createdAt | date('H\\hi') }}</p>
+
+                <div class="mt-6 flex flex-col gap-4 bg-gray-50 p-4 rounded text-gray-800">
+                    {{ comment.content | markdown_to_html }}
+                </div>
+            </div>
+    </section>
+{% endblock %}
