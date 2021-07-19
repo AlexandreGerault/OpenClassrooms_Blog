@@ -57,6 +57,6 @@ class RegistrationController extends BaseController
         $this->repository->register($name, $email, $password);
         $this->auth->attempt($email, $password);
 
-        return new Response(200, [], 'User created with success');
+        return $this->redirect('/');
     }
 }

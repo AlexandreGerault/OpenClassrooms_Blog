@@ -45,18 +45,18 @@ class LoginController extends BaseController
         // Validating data
         $validator = new LoginValidator($request->getParsedBody(), $this->PDO);
         $validated = $validator->validated();
-        if (! $validator->isValid()) {
-            return new Response(400, [], implode(', ', $validator->errors()));
+        if ( ! $validator->isValid()) {
+            return $this->render('auth/login.html.twig', ['errors' => $validator->errors()]);
         }
-
 
         // Authentication
         try {
             $this->login->attempt($validated['email'], $validated['password']);
+
             return $this->redirect('/');
         } catch (AuthenticatableNotFoundException $exception) {
-            return new Response(400, [], $exception->getMessage());
+            return $this->render('auth/login.html.twig',
+                ['errors' => ['credentials' => 'Aucun utilisateur avec ces informations ne correspond.']]);
         }
-
     }
 }
