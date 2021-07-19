@@ -19,7 +19,7 @@ if (!$handle) {
 
 echo "Ouverture du dossier DB\n";
 
-while (false !== ($entry = readdir($handle))) {
+foreach (scandir("database/migrations/") as $entry) {
     if(! str_ends_with($entry, '.sql')) {
         continue;
     }
