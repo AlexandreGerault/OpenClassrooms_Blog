@@ -42,7 +42,7 @@ class User implements UserInterface
 
     public function isAdmin(): bool
     {
-        return $this?->isAdmin;
+        return $this?->isAdmin ?? false;
     }
 
     public function name(): string
@@ -52,6 +52,6 @@ class User implements UserInterface
 
     public function isValidated(): bool
     {
-        return $this?->isValidated;
+        return $this?->isValidated ?? false;
     }
 }
