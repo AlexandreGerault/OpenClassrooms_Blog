@@ -44,4 +44,11 @@ class CommentsController extends BaseController
 
         return $this->redirect('/admin/comments');
     }
+
+    public function show(ServerRequestInterface $request, int $id): ResponseInterface
+    {
+        $comment = $this->commentsRepository->get($id);
+
+        return $this->render('/admin/comments/show.html.twig', compact('comment'));
+    }
 }
