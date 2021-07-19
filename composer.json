@@ -31,7 +31,7 @@
     "psr/http-server-handler": "^1.0",
     "ext-pdo": "*",
     "beberlei/assert": "^3.3",
-    "alexandre-gerault/framwork-php": "^0.0.4",
+    "alexandre-gerault/framwork-php": "^0.0.5",
     "grafikart/psr15-csrf-middleware": "^1.0",
     "twig/markdown-extra": "^3.3",
     "erusev/parsedown": "^1.7"
