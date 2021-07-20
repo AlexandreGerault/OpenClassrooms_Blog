@@ -20,8 +20,7 @@ class CommentValidator extends Validator
         return [
             'email' => [
                 new StringRule($this->input('email')),
-                new EmailRule($this->input('email')),
-                new UniqueRule($this->input('email'), $this->PDO, 'users', 'email')
+                new EmailRule($this->input('email'))
             ],
             'name' => [new StringRule($this->input('name'))],
             'content' => [new StringRule($this->input('content'))]
