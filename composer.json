@@ -31,9 +31,13 @@
     "psr/http-server-handler": "^1.0",
     "ext-pdo": "*",
     "beberlei/assert": "^3.3",
-    "alexandre-gerault/framwork-php": "^0.0.5",
+    "alexandre-gerault/framwork-php": "^1.0.0",
     "grafikart/psr15-csrf-middleware": "^1.0",
     "twig/markdown-extra": "^3.3",
-    "erusev/parsedown": "^1.7"
+    "erusev/parsedown": "^1.7",
+    "mailgun/mailgun-php": "^3.5",
+    "kriswallsmith/buzz": "^1.2",
+    "nyholm/psr7": "^1.4",
+    "swiftmailer/swiftmailer": "^6.2"
   }
 }

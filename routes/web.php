@@ -9,6 +9,7 @@ use AGerault\Blog\Controllers\BlogController;
 use AGerault\Blog\Controllers\SubmitCommentController;
 use AGerault\Blog\Controllers\HomeController;
 use AGerault\Blog\Controllers\Logout;
+use AGerault\Blog\Controllers\SubmitContactController;
 
 return [
     [
@@ -155,4 +156,10 @@ return [
         'method' => 'GET',
         'action' => [Logout::class]
     ],
+    [
+        'path' => '/contact',
+        'name' => 'contact',
+        'method' => 'POST',
+        'action' => [SubmitContactController::class]
+    ]
 ];

@@ -7,3 +7,4 @@
 /mix-manifest.json
 .env
 !.env.example
+/var
