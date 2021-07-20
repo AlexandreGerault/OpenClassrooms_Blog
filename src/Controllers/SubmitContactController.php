@@ -27,6 +27,7 @@ class SubmitContactController extends BaseController
 
         $this
             ->mailer
+            ->subject($inputs['subject'])
             ->from('alexandre@hexium.io')
             ->to('alexandre@hexium.io')
             ->text($content)
