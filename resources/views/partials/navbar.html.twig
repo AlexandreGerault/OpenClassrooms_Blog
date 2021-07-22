@@ -32,7 +32,6 @@
 
                 <a href="/portfolio" class="font-medium text-gray-500 hover:text-gray-900">Réalisations</a>
 
-
                 {% if user.isAdmin %}
                     <a href="/admin/blog" class="font-medium text-gray-500 hover:text-gray-900">
                         Administration
@@ -55,7 +54,12 @@
                       </a>
                     </span>
                 {% else %}
-                    {{ user.login }}
+                    <form action="/auth/logout" method="post">
+                        {{  csrf() | raw }}
+                        <button class="xl:text-red-900">
+                            Déconnexion
+                        </button>
+                    </form>
                 {% endif %}
             </div>
         </nav>
