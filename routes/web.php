@@ -153,7 +153,7 @@ return [
     [
         'path' => '/auth/logout',
         'name' => 'auth.logout',
-        'method' => 'GET',
+        'method' => 'POST',
         'action' => [Logout::class]
     ],
     [

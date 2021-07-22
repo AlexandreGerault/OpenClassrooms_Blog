@@ -2,17 +2,22 @@
 
 namespace AGerault\Blog\Controllers;
 
+use AGerault\Blog\Services\AuthService;
 use AGerault\Framework\Contracts\Session\SessionInterface;
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Twig\Environment;
 
 class Logout extends BaseController
 {
-    public function __construct(protected Environment $twig, protected SessionInterface $session) {}
+    public function __construct(
+        protected Environment $twig,
+        protected SessionInterface $session,
+        protected AuthService $auth
+    ) {}
 
-    public function __invoke(): Response
+    public function __invoke(): ResponseInterface
     {
-        $this->session->forget('user');
+        $this->auth->logout();
         return $this->redirect('/');
     }
 }
