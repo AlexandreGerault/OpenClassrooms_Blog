@@ -1,0 +1,26 @@
+@startuml
+
+autonumber
+
+actor Visitor
+actor Admin
+participant App
+database "Persistence layer" as DB
+
+Visitor -> App: Submit comment
+activate App
+App -> DB : Save comment to the post as invalid by default
+App -> Visitor : Redirect on the post page
+deactivate App
+
+... Later on ...
+Admin -> App : Ask comments list
+activate App
+App -> DB : Fetch comments with associated post title
+App -> Admin : Display page
+Admin -> App : Valid a comment
+App -> DB : Update post and set valid
+App -> Admin : Redirect on comments index page
+deactivate App
+
+@enduml

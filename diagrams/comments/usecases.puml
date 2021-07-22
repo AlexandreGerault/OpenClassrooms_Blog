@@ -1,0 +1,14 @@
+@startuml
+
+left to right direction
+
+usecase "Post a comment on an article" as PostComment
+usecase "Valid a published comment" as ValidComment
+usecase "Invalid a validated comment" as InvalidComment
+usecase "Delete a comment" as DeleteComment
+
+:Visitor: --> PostComment
+:Admin: --> ValidComment
+:Admin: --> InvalidComment
+:Admin: --> DeleteComment
+@enduml
