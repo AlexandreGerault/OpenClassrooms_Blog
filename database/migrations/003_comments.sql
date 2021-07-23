@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS comments
     CONSTRAINT `comments_pk`
         PRIMARY KEY (`id`),
     CONSTRAINT comments_articles_id_fk
-        FOREIGN KEY (`article_id`) REFERENCES articles (`id`)
+        FOREIGN KEY (`article_id`) REFERENCES articles (`id`) ON DELETE CASCADE
 );
