@@ -8,7 +8,7 @@ use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
 use AGerault\Blog\Controllers\SubmitCommentController;
 use AGerault\Blog\Controllers\HomeController;
-use AGerault\Blog\Controllers\Logout;
+use AGerault\Blog\Controllers\LogoutController;
 use AGerault\Blog\Controllers\SubmitContactController;
 
 return [
@@ -154,7 +154,7 @@ return [
         'path' => '/auth/logout',
         'name' => 'auth.logout',
         'method' => 'POST',
-        'action' => [Logout::class]
+        'action' => [LogoutController::class]
     ],
     [
         'path' => '/contact',

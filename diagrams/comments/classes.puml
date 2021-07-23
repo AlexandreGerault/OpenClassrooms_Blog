@@ -1,43 +1,179 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-interface CommentsRepositoryInterface{
-    +allComments(): Comment[]
-    +createCommentToBeValidated(Article $article, array $values): void
-    +validComment($int id): void
-    +invalidComment($int id): void
-    +delete($int id): void
-    +get($int id): Comment
+package Comments {
+    class Comment {
+        -email: string
+        -name: string
+        -content: string
+        -article: Article
+        -validated: bool
+        -createdAt: DateTimeInterface
+
+        +email(): string
+        +name(): string
+        +content(): string
+        +article(): Article
+        +validated(): bool
+        +createdAt(): DateTimeInterface
+    }
+
+    interface CommentsRepositoryInterface{
+        +allComments(): Comment[]
+        +createCommentToBeValidated(article: Article, values: Array): void
+        +validComment(id: int): void
+        +invalidComment(id: int): void
+        +delete(id: int): void
+        +get(id: int): Comment
+    }
+
+    class CommentsRepository implements CommentsRepositoryInterface {
+        -PDO
+    }
+
+    class SubmitCommentController {
+        + __invoke(request: ServerRequestInterface): ResponseInterface
+    }
+
+    class CommentValidator {
+        -pdo: PDO
+        -inputs: array
+
+        +rules(): array
+    }
+
+    CommentsRepositoryInterface ..> Comment
+    SubmitCommentController ..> CommentValidator
 }
 
-class CommentsRepository implements CommentsRepositoryInterface {
-    -PDO
+package Articles {
+    class Article {
+        -title: string
+        -slug: string
+        -chapo: string
+        -content: string
+        -author: User
+        -createdAt: DateTimeInterface
+        -updatedAt: DateTimeInterface
+
+        +title(): string
+        +slug(): string
+        +chapo(): string
+        +content(): string
+        +author(): User
+        +createdAt(): DateTimeInterface
+        +updatedAt(): DateTimeInterface
+    }
+
+    interface ArticlesRepositoryInterface {
+        +getRecentArticlesForPage(page: int): Articles[];
+        +getArticleBySlug(slug: string): Article;
+        +getArticleBySlugWithValidatedComments(slug: string): Article;
+        +getArticleById(id: int): Article;
+        +store(post: Article): void;
+        +update(id: int, values: array): void;
+        +delete(id: int): void;
+    }
+
+    class ArticlesRepository implements ArticlesRepositoryInterface {
+        - pdo: PDO
+    }
+
+    class Controllers/BlogController {
+        +index(request: ServerRequestInterface): ResponseInterface
+        +show(ServerRequestInterface request, id: int): ResponseInterface
+    }
+
+    ArticlesRepositoryInterface ..> Article
+    "Controllers/BlogController" ..> ArticlesRepositoryInterface
 }
 
-class User {
-    -string name
-    -string email
-    -bool admin
+package Backoffice {
+    class BlogController {
+        +index(request: ServerRequestInterface): ResponseInterface
+        +create(request: ServerRequestInterface): ResponseInterface
+        +store(request: ServerRequestInterface): ResponseInterface
+        +show(request: ServerRequestInterface, id: int): ResponseInterface
+        +edit(request: ServerRequestInterface, id: int): ResponseInterface
+        +update(request: ServerRequestInterface, id: int): ResponseInterface
+        +delete(request: ServerRequestInterface, id: int): ResponseInterface
+    }
 
-    +name(): string
-    +email(): string
-    +admin(): bool
+    class CommentsController {
+        -pdo: PDO
+        -twig: TwigEnvironment
+        
+        +index(): ResponseInterface
+        +validComment(request: ServerRequestInterface, id: int): ResponseInterface
+        +invalidComment(request: ServerRequestInterface, id: int): ResponseInterface
+        +delete(request: ServerRequestInterface, id: int): ResponseInterface
+        +show(request: ServerRequestInterface, id: int): ResponseInterface
+    }
+
+    class ArticleValidator {
+        -pdo: PDO
+        -inputs: array
+
+        +rules(): array
+    }
+
+    BlogController ..> ArticleValidator
+    CommentsController ..> CommentsRepositoryInterface
 }
 
-class Comment {
-    -email: string
-    -name: string
-    -content: string
-    -article: Article
-    -validated: bool
-    -createdAt: DateTimeInterface
+package Authentication {
+    interface UserInterface {
+        +name(): string;
+        +isValidated(): bool;
+        +isAdmin(): bool;
+    }
 
-    +email(): string
-    +name(): string
-    +content(): string
-    +article(): Article
-    +validated(): bool
-    +createdAt(): DateTimeInterface
+    class LoginController {
+        + __invoke(request: ServerRequestInterface): ResponseInterface
+    }
+
+    class LogoutController {
+        + __invoke(request: ServerRequestInterface): ResponseInterface
+    }
+
+    class RegistrationController {
+        + __invoke(request: ServerRequestInterface): ResponseInterface
+    }
+
+    interface UsersRepositoryInterface {
+        +register(name: string, email: string, password: string): AuthenticatableInterface
+    }
+
+    class AuthService {
+        +attempt(login: string, password: string): AuthenticatableInterface
+        +check(): bool
+        +user(): User
+        +logout(): void
+    }
+
+    class User implements UserInterface {
+        -string name
+        -string email
+        -bool admin
+
+        +email(): string
+    }
+
+    AuthService ..> UserInterface
+
+    LoginController ..> AuthService
+    LogoutController ..> AuthService
+    RegistrationController ..> AuthService
+
+    class UsersRepository implements UsersRepositoryInterface {}
+
+    AuthService ..> UsersRepositoryInterface
 }
+
+SubmitCommentController ..> ArticlesRepositoryInterface
+SubmitCommentController ..> CommentsRepositoryInterface
+
+BlogController ..> ArticlesRepositoryInterface
+BlogController ..> AuthService
 
 @enduml

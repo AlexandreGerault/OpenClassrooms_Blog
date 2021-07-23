@@ -1,13 +1,13 @@
 <?php
 
-namespace AGerault\Blog\Controllers;
+namespace AGerault\Blog\Controllers\Authentication;
 
 use AGerault\Blog\Services\AuthService;
 use AGerault\Framework\Contracts\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Twig\Environment;
 
-class Logout extends BaseController
+class LogoutController extends BaseController
 {
     public function __construct(
         protected Environment $twig,

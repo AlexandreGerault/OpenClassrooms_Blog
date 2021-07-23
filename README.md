@@ -1,7 +1,8 @@
 
 # Blog for OpenClassroom course
 
-This project is a blog made from scratch, thus using my own framework. It goals was to learn basics of PHP and OO paradigm and respecting SOLID principles as needed.
+This project is a blog made from scratch, thus using my own framework. Its goals were to learn basics of PHP and OO
+paradigm and respecting SOLID principles as needed.
 
 
 ## Installation
@@ -12,6 +13,7 @@ Install the project by cloning it onto your system using git
 ```bash
   git clone https://github.com/AlexandreGerault/OpenClassrooms_Blog.git alexandre_gerault_blog
   cd alexandre_gerault_blog
+  npx mix --production
 ```
 
 ### With Docker

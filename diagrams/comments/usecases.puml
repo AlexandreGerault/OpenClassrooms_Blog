@@ -2,12 +2,43 @@
 
 left to right direction
 
-usecase "Post a comment on an article" as PostComment
-usecase "Valid a published comment" as ValidComment
-usecase "Invalid a validated comment" as InvalidComment
-usecase "Delete a comment" as DeleteComment
+package Backoffice {
+    usecase "Valid a published comment" as ValidComment
+    usecase "Invalid a validated comment" as InvalidComment
+    usecase "Delete a comment" as DeleteComment
+}
+
+package Article {
+    usecase "List articles" as ArticleIndex
+    usecase "Show an article" as ArticleShow
+}
+
+package Comments {
+    usecase "Post a comment on an article" as PostComment
+}
+
+package Authentication {
+    usecase Login
+    usecase Logout
+    usecase Register
+}
+
+usecase "Show homepage" as HomepageShow
+usecase "Submit a contact form" as ContactSubmit
+
+:User: -|> :Visitor:
+:Admin: -|> :User:
 
 :Visitor: --> PostComment
+:Visitor: --> Login
+:Visitor: --> Register
+:Visitor: --> ArticleIndex
+:Visitor: --> ArticleShow
+:Visitor: --> HomepageShow
+:Visitor: --> ContactSubmit
+
+:User: --> Logout
+
 :Admin: --> ValidComment
 :Admin: --> InvalidComment
 :Admin: --> DeleteComment
