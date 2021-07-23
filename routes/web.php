@@ -2,13 +2,12 @@
 
 use \AGerault\Blog\Controllers\Admin\BlogController as AdminBlogController;
 use AGerault\Blog\Controllers\Admin\CommentsController;
-use AGerault\Blog\Controllers\Admin\DashboardController;
 use AGerault\Blog\Controllers\Authentication\LoginController;
 use AGerault\Blog\Controllers\Authentication\RegistrationController;
 use AGerault\Blog\Controllers\BlogController;
 use AGerault\Blog\Controllers\SubmitCommentController;
 use AGerault\Blog\Controllers\HomeController;
-use AGerault\Blog\Controllers\LogoutController;
+use AGerault\Blog\Controllers\Authentication\LogoutController;
 use AGerault\Blog\Controllers\SubmitContactController;
 
 return [
@@ -104,12 +103,6 @@ return [
     ],
 
     // Blog administration routes
-    [
-        'path' => '/admin',
-        'name' => 'admin.dashboard',
-        'method' => 'GET',
-        'action' => [DashboardController::class]
-    ],
     [
         'path' => '/admin/blog/create',
         'name' => 'admin.blog.create',

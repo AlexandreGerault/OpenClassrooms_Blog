@@ -2,6 +2,7 @@
 
 namespace AGerault\Blog\Controllers\Authentication;
 
+use AGerault\Blog\Controllers\BaseController;
 use AGerault\Blog\Services\AuthService;
 use AGerault\Framework\Contracts\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
